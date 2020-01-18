@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+	<xs:element name="buildings">
+	<xs:complexType>
+	<xs:sequence>
+		<xs:element name="building" maxOccurs="unbounded">
+			<xs:complexType>
+			 <xs:sequence>
+			 	<xs:element name="BuildingCode">
+					 <xs:simpleType>
+						 <xs:restriction base="xs:string">
+						 	<xs:pattern value="[A-Z]{3}"/>
+						 </xs:restriction>
+					 </xs:simpleType>
+				 </xs:element>
+				 <xs:element name= "BuildingName" type="xs:string"/>
+				 <xs:element name= "Location" minOccurs="1" maxOccurs="1">
+				 	<xs:complexType>
+				 		<xs:sequence>
+				 			<xs:element name="Latitude" type="xs:double"/>
+				 			<xs:element name="Longitude" type="xs:double"/>
+				 		</xs:sequence>
+				 	</xs:complexType>
+				 </xs:element>
+				 <xs:element name= "Address" minOccurs="0" maxOccurs="unbounded">
+				 	<xs:complexType>
+				 		<xs:sequence>
+				 			<xs:element name="StreetNo" type="xs:string"/>
+				 			<xs:element name="StrName" type="xs:string"/>
+				 			<xs:element name="City" type="xs:string"/>
+				 			<xs:element name="State" type="xs:string"/>
+				 			<xs:element name="Zip">
+					 			<xs:simpleType>
+									 <xs:restriction base="xs:string">
+									 	<xs:pattern value="\d{5}"/>
+									 </xs:restriction>
+							 	</xs:simpleType>
+							</xs:element>
+				 		</xs:sequence>
+				 	</xs:complexType>
+				 </xs:element>
+			 </xs:sequence>
+			</xs:complexType>
+		</xs:element>
+	</xs:sequence>
+	</xs:complexType>
+		<xs:key name="PKbuilding">
+				<xs:selector xpath="building/BuildingCode"/>
+		        <xs:field xpath="."/>
+			</xs:key>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,5 @@
+/* 4. A decade is any sequence of 10 consecutive years (e.g., 2000, 2001, …, 2010 is a decade).
+ Find the decade with the largest number of films (output only the first year of the decade). */
+
+SELECT CONCAT(LPAD(CAST(RELEASE_YEAR AS VARCHAR(4)),3) , '0') AS DECADE_WITH_MAX_MOVIES FROM MOVIE GROUP BY LPAD(CAST(RELEASE_YEAR AS VARCHAR(4)),3) HAVING COUNT(SERIAL_NO) = (SELECT MAX(N) FROM (SELECT COUNT(SERIAL_NO) AS N, CONCAT(LPAD(CAST(RELEASE_YEAR AS VARCHAR(4)),3) , '0') AS DECADE FROM MOVIE GROUP BY LPAD(CAST(RELEASE_YEAR AS VARCHAR(4)),3) ORDER BY N DESC));
+
